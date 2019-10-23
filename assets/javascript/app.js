@@ -11,6 +11,7 @@
 
 console.log("The javascript is linked");
 
+//an array of objects contain the questions and answers
 var questions = [
     {
         q: "Who was the first woman to score a perfect 10 at the Olympics?",
@@ -29,7 +30,7 @@ var questions = [
         correct: "Vault and Uneven Bars"
     },
     {
-        q: "Which American gymnast performed her final vault in the 1996 Olympics on an injured ankle, clinching the gold for the USA?", 
+        q: "Which American gymnast performed her final vault in the 1996 Olympics on an injured ankle, clinching the gold for the USA?",
         a1: "Dominique Moceanu",
         a2: "Kerri Strug",
         a3: "Bela Karolyi",
@@ -51,6 +52,14 @@ var questions = [
         a3: "Larisa Latynina",
         a4: "Simone Biles",
         correct: "Simone Biles"
+    },
+    {
+        q: "Which gymnast won the gold medal on Vault in the 2012 Olympics?",
+        a1: "Sandra Izbasa",
+        a2: "McKayla Maroney",
+        a3: "Mykayla Skinner",
+        a4: "Simone Biles",
+        corredc: "Sandra Izbasa"
     }
 
 ]
@@ -59,3 +68,26 @@ console.log("questions is " + questions);
 
 console.log("The first question is: " + questions[0].q);
 console.log("The wrong answers to the second question are " + questions[1].a2 + ", " + questions[1].a3 + ", " + questions[1].a4);
+
+var intervalID;
+var time = 10;
+
+intervalID = setInterval(countdown, 1000);
+
+$("#timeLeft").append(time);
+
+console.log("intervalID is " + intervalID);
+
+
+
+
+
+
+//function coundown decreases "time" by 1 each time it's called
+function countdown() {
+    if (time > 0) {
+        time--;
+        $("#timeLeft").text(time);
+    }
+}
+
