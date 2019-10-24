@@ -73,7 +73,7 @@ console.log("The first question is: " + questions[0].q);
 console.log("The wrong answers to the second question are " + questions[1].a2 + ", " + questions[1].a3 + ", " + questions[1].a4);
 
 var intervalID;
-var time = 5;
+var time = 6;
 
 intervalID = setInterval(countdown, 1000);
 
@@ -99,6 +99,7 @@ function countdown() {
 
 //The next question is shown in the html
 function showQuestion() {
+    time = 3;
     $("#question").html(questions[index].q);
     $("#answers").html('<input type="radio" name="option" class="radio-button" value="a" data-name="' + questions[index].a1 + '">' + questions[index].a1 + '<br /> <input type="radio" name="option" class="radio-button" value="b" data-name="' + questions[index].a2 + '">' + questions[index].a2 + '<br /> <input type="radio" name="option"  class="radio-button" value="c" data-name="' + questions[index].a3 + '">' + questions[index].a3 + '<br /> <input type="radio" name="option"  class="radio-button" value="d" data-name="' + questions[index].a4 + '">' + questions[index].a4 + '<br /> </p>')
 
@@ -131,7 +132,6 @@ $(document).on("click", ".radio-button", function () {
     if (index < questions.length - 1) {
         index++;
         console.log(index);
-        time = 5;
         showQuestion();
     }
     //if it's the last question, call the results page
@@ -149,18 +149,17 @@ function timeOut() {
     wrong++;
     console.log("index is " + index);
     console.log("wrong is " + wrong);
-    if (index < questions.length - 1) {
-        time = 5;
+    if (index < questions.length) {
         showQuestion();
     }
     else {
-
         clearInterval(intervalID);
         resultsPage();
     }
 }
 
 function resultsPage() {
+    clearInterval(intervalID);
     console.log("resultsPage was called");
     var resultpg = $(".container");
     resultpg.html("<h4>Results Page!</h4>");
