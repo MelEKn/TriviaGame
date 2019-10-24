@@ -9,7 +9,6 @@
 //     fourthQuestion: ["This is the first wrong answer to the fourth question", "This is the second wrong answer to the fourth question", "This is the third wrong answer to the fourth question"]]
 // }
 
-console.log("The javascript is linked");
 
 //an array of objects contain the questions and answers
 var questions = [
@@ -22,12 +21,12 @@ var questions = [
         correct: "Nadia Comaneci"
     },
     {
-        q: "In which events can gymnasts not be penalized for going overtime?",
-        a1: "Vault and Uneven Bars",
-        a2: "Balance Beam and Floor Exercise",
+        q: "In which events can gymnasts be penalized for going overtime?",
+        a1: "Balance Beam and Floor Exercise",
+        a2: "Vault and Uneven Bars",
         a3: "Vault, Uneven Bars, and Floor Exercise",
         a4: "All of them",
-        correct: "Vault and Uneven Bars"
+        correct: "Balance Beam and Floor Exercise"
     },
     {
         q: "Which American gymnast performed her final vault in the 1996 Olympics on an injured ankle, clinching the gold for the USA?",
@@ -59,10 +58,14 @@ var questions = [
         a2: "McKayla Maroney",
         a3: "Mykayla Skinner",
         a4: "Simone Biles",
-        corredc: "Sandra Izbasa"
+        correct: "Sandra Izbasa"
     }
 
 ]
+
+var right = 0;
+var wrong = 0;
+var index = 0;
 
 console.log("questions is " + questions);
 
@@ -70,16 +73,16 @@ console.log("The first question is: " + questions[0].q);
 console.log("The wrong answers to the second question are " + questions[1].a2 + ", " + questions[1].a3 + ", " + questions[1].a4);
 
 var intervalID;
-var time = 10;
+var time = 5;
 
 intervalID = setInterval(countdown, 1000);
 
-$("#timeLeft").append(time);
+//Begins the timer at 5s 
+$("#timeLeft").append(time + "s");
 
 console.log("intervalID is " + intervalID);
 
-
-
+showQuestion();
 
 
 
@@ -87,7 +90,70 @@ console.log("intervalID is " + intervalID);
 function countdown() {
     if (time > 0) {
         time--;
-        $("#timeLeft").text(time);
+        $("#timeLeft").text(time + "s");
+    }
+    else {
+        timeOut();
     }
 }
 
+//The next question is shown in the html
+function showQuestion() {
+    $("#question").html(questions[index].q);
+    $("#answers").html('<input type="radio" name="option" class="radio-button" value="a" data-name="' + questions[index].a1 + '">' + questions[index].a1 + '<br /> <input type="radio" name="option" class="radio-button" value="b" data-name="' + questions[index].a2 + '">' + questions[index].a2 + '<br /> <input type="radio" name="option"  class="radio-button" value="c" data-name="' + questions[index].a3 + '">' + questions[index].a3 + '<br /> <input type="radio" name="option"  class="radio-button" value="d" data-name="' + questions[index].a4 + '">' + questions[index].a4 + '<br /> </p>')
+
+
+
+}
+
+//Function executes when the user presses a button
+$(document).on("click", ".radio-button", function () {
+
+    //gets the user's selection
+    var response = $(this).attr("data-name")
+    console.log(response);
+
+    //if it's correct, right is increased by 1
+    //if it's incorrect, wrong is increased
+    if (response == questions[index].correct) {
+        console.log("Correct!");
+        right++;
+        console.log("right is " + right);
+    } else {
+        console.log("Incorrect!");
+        wrong++;
+        console.log("wrong is " + wrong);
+    }
+
+    //if the question isn't the last one in the array,
+    //time is reset to 5s and showQuestion() is called
+    //to show the next question
+    if (index < questions.length - 1) {
+        index++;
+        console.log(index);
+        time = 5;
+        showQuestion();
+    }
+});
+
+function timeOut() {
+    console.log("timeOut was called");
+    time = 5;
+    wrong++;
+    index++;
+    console.log("index is " + index);
+    console.log("wrong is " + wrong);
+    if (index < questions.length - 1) {
+        showQuestion();
+    }
+    else {
+
+        clearInterval(intervalID);
+        resultsPage();
+    }
+}
+
+function resultsPage() {
+    console.log("resultsPage was called");
+
+}
