@@ -134,16 +134,23 @@ $(document).on("click", ".radio-button", function () {
         time = 5;
         showQuestion();
     }
+    //if it's the last question, call the results page
+    else {
+        resultsPage();
+    }
 });
 
+//if the timer runs out, restart the timer,
+//mark the answer as wrong, and either go
+//to the next question or the results page
 function timeOut() {
     console.log("timeOut was called");
-    time = 5;
-    wrong++;
     index++;
+    wrong++;
     console.log("index is " + index);
     console.log("wrong is " + wrong);
     if (index < questions.length - 1) {
+        time = 5;
         showQuestion();
     }
     else {
