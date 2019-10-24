@@ -102,7 +102,17 @@ function showQuestion() {
     time = 3;
     $("#question").html(questions[index].q);
     $("#answers").html('<input type="radio" name="option" class="radio-button" value="a" data-name="' + questions[index].a1 + '">' + questions[index].a1 + '<br /> <input type="radio" name="option" class="radio-button" value="b" data-name="' + questions[index].a2 + '">' + questions[index].a2 + '<br /> <input type="radio" name="option"  class="radio-button" value="c" data-name="' + questions[index].a3 + '">' + questions[index].a3 + '<br /> <input type="radio" name="option"  class="radio-button" value="d" data-name="' + questions[index].a4 + '">' + questions[index].a4 + '<br /> </p>')
+}
 
+
+//Tells the user they got the question wrong and shows the correct answer for a few seconds
+function showAnswer(){
+    console.log("showAnswer was called");
+
+    var answerpg = $(".container");
+    answerpg.html("<h4>Answer Page!</h4>");
+    answerpg.append("<p> You answered x " + right + "</p>");
+    resultpg.append("<p>You shoyuld have answered y " + wrong + "</p>");
 
 
 }
