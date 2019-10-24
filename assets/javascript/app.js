@@ -155,5 +155,11 @@ function timeOut() {
 
 function resultsPage() {
     console.log("resultsPage was called");
+    var resultpg = $(".container");
+    resultpg.html("<h4>Results Page!</h4>");
+    resultpg.append("<p> Correct answers: " + right + "</p>");
+    resultpg.append("<p>Incorrect answers: " + wrong + "</p>");
+    // $(".quiz").html("Results page!");
+
 
 }
